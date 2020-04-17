@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/tasks', (req, res) => {
     const {id} = req.params;
 
-    Projects.findTasks(id)
+    Projects.findProjectTasks(id)
     .then(tasks => {
         if (tasks.length) {
             res.json(tasks)
