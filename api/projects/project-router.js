@@ -46,6 +46,26 @@ router.get('/:id/tasks', (req, res) => {
     });
 });
 
+router.post('/:id/tasks', (req, res) => {
+    const taskData = req.body;
+    const { id } = req.params; 
+  
+    Projects.findById(id)
+    .then(project => {
+      if (project) {
+        Projects.addTask(taskData, id)
+        .then(step => {
+          res.status(201).json(step);
+        })
+      } else {
+        res.status(404).json({ message: 'Could not find scheme with given id.' })
+      }
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to create new step' });
+    });
+  });
+
 router.post('/', (req, res) => {
     const projectData = req.body;
 
