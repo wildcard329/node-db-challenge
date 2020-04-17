@@ -1,4 +1,4 @@
-const db = require('../data/db-config.js')
+const db = require('../../data/db-config.js')
 module.exports = {
     find, 
     findById,
@@ -35,4 +35,11 @@ function remove(id) {
         .join('tasks as t', 'p.id', 't.id')
         .select('p.name', 't.description as task', 't.notes')
         .where({'p.id':id})
+}
+
+function findTasks(id) {
+    return db('projects as p')
+        .join('tasks as t', 'p.id', 't.id')
+        .select('p.name', 't.description as task', 't.notes')
+        .where({'p.id': id})
 }
